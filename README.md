@@ -68,7 +68,7 @@ string fullName = firstName + " " + lastName;
 myString = Console.ReadLine();
 ```
 
-<b>Strings can as well:<b>
+**Strings can as well:**
 
 - Get length: `myString.Length`
 - Get single char: `myString[0]`
