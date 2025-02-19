@@ -933,13 +933,13 @@ Only whole numbers (32 bits)
 ### Inheritance
 
 - Inheritance is a mechanism in which one class inherits the properties and behavior of another class
-- Examples of this are on [Inheritance](/Learn/Inheritance/Program.cs)
+- Examples of this are on [Inheritance](/Inheritance/Program.cs)
 
 ### Interfaces
 
 - An interface is a contract that a class can implement
 - It defines a set of methods and properties that a class must implement
-- Examples of this are on [Interfaces](/Learn/Interfaces/Program.cs)
+- Examples of this are on [Interfaces](/Interfaces/Program.cs)
 - When creating the name, it is common to start with `I` (like `IComparable`, `IDisposable`, `IEnumerable`)
 
 ### Abstract Classes
@@ -947,4 +947,4 @@ Only whole numbers (32 bits)
 - They are classes but they can't be instantiated directly
 - They are used to define a common behavior for all the classes that inherit from it. So the child classes would have to implement the methods
 - Abstract classes can also inherit from interfaces AND other abstract classes
-- Examples of this are on [Abstract Classes](/Learn/AbstractClasses/Program.cs)
+- Examples of this are on [Abstract Classes](/AbstractClasses/Program.cs)
