@@ -1,0 +1,15 @@
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Composition/bin/Debug/net9.0/Composition
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Composition/bin/Debug/net9.0/Composition.deps.json
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Composition/bin/Debug/net9.0/Composition.runtimeconfig.json
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Composition/bin/Debug/net9.0/Composition.dll
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Composition/bin/Debug/net9.0/Composition.pdb
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Composition/obj/Debug/net9.0/Composition.GeneratedMSBuildEditorConfig.editorconfig
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Composition/obj/Debug/net9.0/Composition.AssemblyInfoInputs.cache
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Composition/obj/Debug/net9.0/Composition.AssemblyInfo.cs
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Composition/obj/Debug/net9.0/Composition.csproj.CoreCompileInputs.cache
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Composition/obj/Debug/net9.0/Composition.sourcelink.json
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Composition/obj/Debug/net9.0/Composition.dll
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Composition/obj/Debug/net9.0/refint/Composition.dll
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Composition/obj/Debug/net9.0/Composition.pdb
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Composition/obj/Debug/net9.0/Composition.genruntimeconfig.cache
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Composition/obj/Debug/net9.0/ref/Composition.dll

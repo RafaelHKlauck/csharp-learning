@@ -44,6 +44,8 @@ This repo is to store my notes about C# programming language that I'm learning f
   - [Interfaces](#interfaces)
   - [Abstract Classes](#abstract-classes)
   - [Protected and Virtual](#protected-and-virtual)
+  - [Composition](#composition)
+  - [Generics](#generics)
 
 ## Variables
 
@@ -940,6 +942,7 @@ Only whole numbers (32 bits)
 
 - An interface is a contract that a class can implement
 - It defines a set of methods and properties that a class must implement
+- They cannot have fields, properties, or constructors
 - Examples of this are on [Interfaces](/Interfaces/Program.cs)
 - When creating the name, it is common to start with `I` (like `IComparable`, `IDisposable`, `IEnumerable`)
 
@@ -948,6 +951,7 @@ Only whole numbers (32 bits)
 - They are classes but they can't be instantiated directly
 - They are used to define a common behavior for all the classes that inherit from it. So the child classes would have to implement the methods
 - Abstract classes can also inherit from interfaces AND other abstract classes
+- The difference between abstract classes and interfaces is that interfaces are used to define contracts for unrelated classes, while abstract classes are used to define a common behavior for related classes.
 - Examples of this are on [Abstract Classes](/AbstractClasses/Program.cs)
 
 ### Protected and Virtual
@@ -955,3 +959,16 @@ Only whole numbers (32 bits)
 - `protected` is an access modifier that makes a member accessible within the class and its subclasses. So the idea here is that classes that are "from outside" can't access it, but the subclasses(children) can!
 - `virtual` is a keyword that allows a method to be overridden in a subclass
 - Examples of this are on [Protected and Virtual](/ProtectedAndVirtual/Program.cs)
+
+### Composition
+
+- Composition is a way to combine objects or data types into more complex ones
+- It is a way to create a "has a" relationship between classes
+- is made up of relationships between objects
+- Examples of this are on [Composition](/Composition/Program.cs)
+
+### Generics
+
+- Generics allow you to define classes, interfaces, methods, and delegates without specifying the type they work with
+- They are used to create classes, interfaces, methods, and delegates that work with any data type
+- Examples of this are on [Generics](/Generics/Program.cs)
