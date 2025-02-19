@@ -43,6 +43,7 @@ This repo is to store my notes about C# programming language that I'm learning f
   - [Inheritance](#inheritance)
   - [Interfaces](#interfaces)
   - [Abstract Classes](#abstract-classes)
+  - [Protected and Virtual](#protected-and-virtual)
 
 ## Variables
 
@@ -948,3 +949,9 @@ Only whole numbers (32 bits)
 - They are used to define a common behavior for all the classes that inherit from it. So the child classes would have to implement the methods
 - Abstract classes can also inherit from interfaces AND other abstract classes
 - Examples of this are on [Abstract Classes](/AbstractClasses/Program.cs)
+
+### Protected and Virtual
+
+- `protected` is an access modifier that makes a member accessible within the class and its subclasses. So the idea here is that classes that are "from outside" can't access it, but the subclasses(children) can!
+- `virtual` is a keyword that allows a method to be overridden in a subclass
+- Examples of this are on [Protected and Virtual](/ProtectedAndVirtual/Program.cs)
