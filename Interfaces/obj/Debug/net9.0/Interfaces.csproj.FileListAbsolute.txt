@@ -1,0 +1,14 @@
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Interfaces/bin/Debug/net9.0/Interfaces
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Interfaces/bin/Debug/net9.0/Interfaces.deps.json
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Interfaces/bin/Debug/net9.0/Interfaces.runtimeconfig.json
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Interfaces/bin/Debug/net9.0/Interfaces.dll
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Interfaces/bin/Debug/net9.0/Interfaces.pdb
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Interfaces/obj/Debug/net9.0/Interfaces.GeneratedMSBuildEditorConfig.editorconfig
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Interfaces/obj/Debug/net9.0/Interfaces.AssemblyInfoInputs.cache
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Interfaces/obj/Debug/net9.0/Interfaces.AssemblyInfo.cs
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Interfaces/obj/Debug/net9.0/Interfaces.csproj.CoreCompileInputs.cache
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Interfaces/obj/Debug/net9.0/Interfaces.dll
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Interfaces/obj/Debug/net9.0/refint/Interfaces.dll
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Interfaces/obj/Debug/net9.0/Interfaces.pdb
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Interfaces/obj/Debug/net9.0/Interfaces.genruntimeconfig.cache
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Interfaces/obj/Debug/net9.0/ref/Interfaces.dll

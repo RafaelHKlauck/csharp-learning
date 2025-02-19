@@ -1,0 +1,14 @@
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/AbstractClasses/bin/Debug/net9.0/AbstractClasses
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/AbstractClasses/bin/Debug/net9.0/AbstractClasses.deps.json
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/AbstractClasses/bin/Debug/net9.0/AbstractClasses.runtimeconfig.json
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/AbstractClasses/bin/Debug/net9.0/AbstractClasses.dll
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/AbstractClasses/bin/Debug/net9.0/AbstractClasses.pdb
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/AbstractClasses/obj/Debug/net9.0/AbstractClasses.GeneratedMSBuildEditorConfig.editorconfig
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/AbstractClasses/obj/Debug/net9.0/AbstractClasses.AssemblyInfoInputs.cache
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/AbstractClasses/obj/Debug/net9.0/AbstractClasses.AssemblyInfo.cs
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/AbstractClasses/obj/Debug/net9.0/AbstractClasses.csproj.CoreCompileInputs.cache
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/AbstractClasses/obj/Debug/net9.0/AbstractClasses.dll
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/AbstractClasses/obj/Debug/net9.0/refint/AbstractClasses.dll
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/AbstractClasses/obj/Debug/net9.0/AbstractClasses.pdb
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/AbstractClasses/obj/Debug/net9.0/AbstractClasses.genruntimeconfig.cache
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/AbstractClasses/obj/Debug/net9.0/ref/AbstractClasses.dll

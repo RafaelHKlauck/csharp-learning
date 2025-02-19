@@ -1,0 +1,14 @@
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Inheritance/bin/Debug/net9.0/Inheritance
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Inheritance/bin/Debug/net9.0/Inheritance.deps.json
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Inheritance/bin/Debug/net9.0/Inheritance.runtimeconfig.json
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Inheritance/bin/Debug/net9.0/Inheritance.dll
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Inheritance/bin/Debug/net9.0/Inheritance.pdb
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Inheritance/obj/Debug/net9.0/Inheritance.GeneratedMSBuildEditorConfig.editorconfig
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Inheritance/obj/Debug/net9.0/Inheritance.AssemblyInfoInputs.cache
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Inheritance/obj/Debug/net9.0/Inheritance.AssemblyInfo.cs
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Inheritance/obj/Debug/net9.0/Inheritance.csproj.CoreCompileInputs.cache
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Inheritance/obj/Debug/net9.0/Inheritance.dll
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Inheritance/obj/Debug/net9.0/refint/Inheritance.dll
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Inheritance/obj/Debug/net9.0/Inheritance.pdb
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Inheritance/obj/Debug/net9.0/Inheritance.genruntimeconfig.cache
+/Users/rafaelhansenklauck/Codes/Pessoal/c#/Learn/Inheritance/obj/Debug/net9.0/ref/Inheritance.dll
