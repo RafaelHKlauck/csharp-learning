@@ -46,6 +46,7 @@ This repo is to store my notes about C# programming language that I'm learning f
   - [Protected and Virtual](#protected-and-virtual)
   - [Composition](#composition)
   - [Generics](#generics)
+  - [Tuples](#tuples)
 
 ## Variables
 
@@ -972,3 +973,98 @@ Only whole numbers (32 bits)
 - Generics allow you to define classes, interfaces, methods, and delegates without specifying the type they work with
 - They are used to create classes, interfaces, methods, and delegates that work with any data type
 - Examples of this are on [Generics](/Generics/Program.cs)
+
+### Tuples
+
+- Data structure that can hold multiple values
+- Two types of tuples in C#: `System.Tuple` and `System.ValueTuple`
+  - `System.Tuple` is a reference type, is immutable and values are properties
+  - `System.ValueTuple` is a value type, is mutable and values are fields
+
+```csharp
+Tuple<int, string> tuple = new(1, "Hello");
+
+ValueTuple<int, string> valueTuple = new(1, "Hello");
+ValueTuple<int, string> valueTuple2 = (1, "Hello"); // This is the same as the line above
+var valueTuple3 = (1,2,3,4,5,6,7,8,9,10); // ... and so on
+```
+
+#### Why use them?
+
+- When you want to return multiple values from a method
+- When you want to pass multiple values to a method
+
+```csharp
+(int, int) GetMinAndMaxWithTuple(int[] numbers)
+{
+  if (numbers.Length == 0)
+  {
+    throw new ArgumentException("The array is empty");
+  }
+
+  int min = numbers[0];
+  int max = numbers[0];
+
+  foreach(int number in numbers)
+  {
+    if (number < min)
+    {
+      min = number;
+    }
+    if (number > max)
+    {
+      max = number;
+    }
+  }
+
+  return (min, max); // This is a value tuple
+}
+
+var minAndMax = GetMinAndMaxWithTuple(new int[] { 1, 2, 3, 4, 5 });
+Console.WriteLine($"Min: {minAndMax.Item1}, Max: {minAndMax.Item2}"); // Min: 1, Max: 5
+```
+
+Why can also have named tuples:
+
+```csharp
+(int Min, int Max) GetMinAndMaxWithTuple(int[] numbers)
+{
+  if (numbers.Length == 0)
+  {
+    throw new ArgumentException("The array is empty");
+  }
+
+  int min = numbers[0];
+  int max = numbers[0];
+
+  foreach(int number in numbers)
+  {
+    if (number < min)
+    {
+      min = number;
+    }
+    if (number > max)
+    {
+      max = number;
+    }
+  }
+
+  return (Min: min, Max: max); // This is a value tuple
+}
+var minAndMax = GetMinAndMaxWithTuple(new int[] { 1, 2, 3, 4, 5 });
+// What is nice about this is that we can access the values by name
+Console.WriteLine($"Min: {minAndMax.Min}, Max: {minAndMax.Max}"); // Min: 1, Max: 5
+```
+
+We can also deconstruct a tuple
+
+```csharp
+(int fistThing, string secondThing) = (1, "This is the second thing!");
+(int min, int max) = GetMinAndMaxWithTuple(new int[] { 1, 2, 3, 4, 5 });
+// just get the min
+(int min, _) = GetMinAndMaxWithTuple(new int[] { 1, 2, 3, 4, 5 });
+// Or
+var (min, _) = GetMinAndMaxWithTuple(new int[] { 1, 2, 3, 4, 5 });
+```
+
+- Equality is based on the values, not the reference, so even the types are different, if the values are the same, it is going to be equal
