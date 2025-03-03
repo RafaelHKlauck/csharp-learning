@@ -47,6 +47,11 @@ This repo is to store my notes about C# programming language that I'm learning f
   - [Composition](#composition)
   - [Generics](#generics)
   - [Tuples](#tuples)
+- [Binary and String data](#binary-and-string-data)
+  - [Enconding strings and bytes](#enconding-strings-and-bytes)
+  - [Streams](#streams)
+  - [Reading and Writing Files](#reading-and-writing-files)
+  - [Using & Disposing Streams](#using--disposing-streams)
 
 ## Variables
 
@@ -1068,3 +1073,154 @@ var (min, _) = GetMinAndMaxWithTuple(new int[] { 1, 2, 3, 4, 5 });
 ```
 
 - Equality is based on the values, not the reference, so even the types are different, if the values are the same, it is going to be equal
+
+## Binary and String data
+
+### Enconding strings and bytes
+
+- Encoding is the process of converting a sequence of characters into a sequence of bytes
+- Decoding is the process of converting a sequence of bytes into a sequence of characters
+
+```csharp
+  string helloWorld = "Hello World!";
+  byte[] asciiBytesForHelloWorld = Encoding.ASCII.GetBytes(helloWorld); // Encode
+  string helloWorldAgain = Encoding.ASCII.GetString(asciiBytesForHelloWorld); // Decode
+
+  // OR we can use the UTF8, which range is bigger, so it can encode more characters
+  byte[] utf8BytesForHelloWorld = Encoding.UTF8.GetBytes(helloWorld); // Encode
+  string helloWorldAgain = Encoding.UTF8.GetString(utf8BytesForHelloWorld); // Decode
+```
+
+### Streams
+
+- Streams are a sequence of bytes
+- They are used to read and write data
+- They provide a common API for working with binary data
+- On C# there's a `Stream` class that is the base class for all streams
+
+```csharp
+MemoryStream memoryStream = new(); // This is a stream that stores data in memory
+
+Console.WriteLine(memoryStream.Position); // 0
+Console.WriteLine(memoryStream.Length); // 0
+Console.WriteLine(memoryStream.Capacity); // 0 -> This is the capacity of the memory stream, this is different than an array length
+
+byte[] data = Encoding.UTF8.GetBytes("Hello World! From Nick Cosentino");
+memoryStream.Write(data, offset: 0, count: data.Length); // Write the data to the memory stream
+
+Console.WriteLine(memoryStream.Position); // 33
+Console.WriteLine(memoryStream.Length);  // 33
+Console.WriteLine(memoryStream.Capacity); // 256
+
+// To read the data we need to point the position to the beginning
+memoryStream.Seek(0, SeekOrigin.Begin);
+// or
+memoryStream.Position = 0;
+
+byte[] readBuffer = new byte[memoryStream.Length];
+int numberOfBytesRead = memoryStream.Read(readBuffer, offset: 0, count: readBuffer.Length);
+Console.WriteLine($"Number of bytes read: ${numberOfBytesRead}"); // 33
+
+string readString = Encoding.UTF8.GetString(readBuffer);
+Console.WriteLine(readString); // Hello World! From Nick Cosentino
+
+// Other thing we can do:
+byte[] memoryStreamBytes = memoryStream.ToArray(); // This is going to return the bytes that are in the memory stream -> same as readBuffer
+```
+
+### Reading and Writing Files
+
+- There's a static class called `File` that has methods to read and write files
+
+```csharp
+// To write a file. First argument is the path, second is the content
+File.WriteAllText("file.txt", "Hello World!");
+File.WriteAllBytes(
+  "file.txt",
+  Encoding.UTF8.GetBytes("Hello World! From Nick Cosentino"));
+
+// We can specify the encoding
+File.WriteAllText("file.txt", "Hello World!", Encoding.UTF8);
+
+// To read a file
+byte[] fileBytes = File.ReadAllBytes("file.txt");
+string fileContent = File.ReadAllText("file.txt");
+
+
+// We can use a similar methods to gain access to a stream
+
+FileStream fileStream = File.Open(
+  "file.txt",
+  FileMode.OpenOrCreate,
+  FileAccess.Write,
+  FileShare.Read);
+
+byte[] buffer = Encoding.UTF8.GetBytes("Hello World!");
+fileStream.Write(buffer, offset: 0, count: buffer.Length);
+
+Stream fileStreamAsStream = fileStream;
+fileStreamAsStream.Seek(0, SeekOrigin.Begin);
+fileStreamAsStream.Write(buffer, offset: 0, count: buffer.Length);
+fileStream.Close();
+
+// To read a file
+FileStream fileStream = File.Open(
+  "file.txt",
+  FileMode.Open,
+  FileAccess.Read,
+  FileShare.None);
+// Remember that this permissions are the file system permissions, where the first one is the file mode, the second is the access, and the third is the share
+byte[] bufferForReading = new byte[readingFileStream.Length];
+
+// But what is the file is huge or we don't know the size?
+readingStream.Seek(0, SeekOrigin.Begin); // Pointing to the beggining
+
+StreamReader streamReader = new(readingStream, Encoding.UTF8);
+while (!streamReader.EndOfStream)
+{
+  string line = streamReader.ReadLine();
+  Console.WriteLine(line);
+}
+```
+
+### Using & Disposing Streams
+
+- Streams are resources that need to be disposed of when we are done with them
+- `IDisposable` is an interface that has a method called `Dispose` that is used to clean up resources
+
+```csharp
+public class MyDisposable : IDisposable
+{
+  public void Dispose()
+  {
+    Console.WriteLine("Cleaning up resources!");
+  }
+}
+
+Stream readmeStream = File.Open("readme.txt", FileMode.Open, FileAccess.Read);
+
+readmeStream.Dispose(); // This is going to clean up the resources
+
+// When opening a stream, we can have an error and the dispose is not going to be called, so we can use a try catch to make sure that the dispose is going to be called
+
+readmeStream = File.Open("readme.txt", FileMode.Open, FileAccess.Read);
+try
+{
+  // Do something with the stream
+}
+catch
+{
+  // Handle the error
+}
+finally
+{
+  readmeStream.Dispose();
+}
+
+// We can also use the using statement as well, that is going to call the dispose method for us
+using (Stream readmeStream = File.Open("readme.txt", FileMode.Open, FileAccess.Read))
+// This readmeStream var only exists inside the using block
+{
+  // Do something with the stream
+}
+```

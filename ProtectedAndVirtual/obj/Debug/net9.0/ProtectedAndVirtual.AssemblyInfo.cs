@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProtectedAndVirtual")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2bf95e309ade760a164a345e067424c286b994a5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fe99d38014b9b8c27eeed3d6b938d93fa45729de")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProtectedAndVirtual")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProtectedAndVirtual")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
