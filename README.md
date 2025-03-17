@@ -52,6 +52,12 @@ This repo is to store my notes about C# programming language that I'm learning f
   - [Streams](#streams)
   - [Reading and Writing Files](#reading-and-writing-files)
   - [Using & Disposing Streams](#using--disposing-streams)
+- [Methods and Functions](#methods-and-functions)
+  - [Callbacks and Delegates](#callbacks-and-delegates)
+  - [Extension Methods](#extension-methods)
+  - [LINQ](#linq)
+  - [Lazy](#lazy)
+  - [Events](#events)
 
 ## Variables
 
@@ -1222,5 +1228,220 @@ using (Stream readmeStream = File.Open("readme.txt", FileMode.Open, FileAccess.R
 // This readmeStream var only exists inside the using block
 {
   // Do something with the stream
+}
+```
+
+## Methods and Functions
+
+### Callbacks and Delegates
+
+- A delegate is a type that represents references to methods with a particular parameter list and return type
+
+```csharp
+  Action action = RafsAction; // Here I have a method declared on a variable
+  action();
+  action.Invoke();
+
+  void RafsAction()
+  {
+    Console.WriteLine("Hello from RafsAction!");
+  }
+```
+
+- On the `Action` we can have parameters, because the Action accepts Generics
+- Is important that the return type **must be** `void`
+
+```csharp
+  Action<int> action = RafsAction;
+  action(42);
+
+  void RafsAction(int number)
+  {
+    Console.WriteLine($"Hello from RafsAction! The number is: {number}");
+  }
+```
+
+- If I want to return a value, I should use `Func`
+- The **LAST** generic is the return type
+
+```csharp
+  Func<int, int> func = RafsFunc;
+  int result = func(42);
+
+  int RafsFunc(int number)
+  {
+    return number * 2;
+  }
+```
+
+- We can use this concepts to pass a method as a parameter of another method!
+
+```csharp
+  void DoSomething(Action action)
+  {
+    action();
+  }
+  DoSomething(RafsAction);
+
+  void DoSomethingWithNumber(Func<int, int> func)
+  {
+    int result = func(42);
+    Console.WriteLine($"The result is: {result}");
+  }
+  DoSomethingWithNumber(RafsFunc);
+```
+
+- We can help readability by using `delegate` keyword
+
+```csharp
+  delegate int CalculateDelegate(
+    int firstNumber,
+    int secondNumber
+  );
+
+  int Add(int a, int b)
+  {
+    return a + b;
+  }
+
+  int Subtract(int a, int b)
+  {
+    return a - b;
+  }
+
+  CalculateDelegate addDelegate = Add;
+  CalculateDelegate subDelegate = Subtract;
+
+  void Calculate(CalculateDelegate calculateCallback)
+  {
+    int result = calculateCallback(10, 5);
+    Console.WriteLine($"The result is: {result}");
+  }
+```
+
+### Extension Methods
+
+- It looks like we are extending the class, but we are not
+- Necessary to
+  - be in a static class
+  - be a static method
+  - need the this keyword on the parameter that we are extending
+  - the parameter marked with this must be first parameter
+
+```csharp
+public static class Extensions
+{
+  public static string CustomReverse(this string str)
+  {
+    var reserverChars = str.Reverse<char>().ToArray();
+    var reserved = new string(reserverChars);
+    return reserved;
+  }
+}
+
+var reserved = "Hello World!".CustomReverse();
+Console.WriteLine(reserved); // !dlroW olleH
+```
+
+- As we can see on the example, we are extending the `string` class with a method called `CustomReverse`. So every time we have a string, we can call this method
+
+### LINQ
+
+- Language Integrated Query
+- LINQ can help us
+  - map: transform data
+  - filter: remove data
+  - reduce: aggregate data
+
+```csharp
+List<string> rawNumbers = ["1", "2", "3", "4", "5"];
+var numbers = rawNumbers.Select(number => int.Parse(number)).ToList();
+// The Select is going to transform the data(like a map)
+
+var evenNumbers = numbers.Where(number => number % 2 == 0).ToList();
+// The Where is going to filter the data
+
+var average = numbers.Average();
+
+// example of a more complex query
+List<string> rawNumberList = ["0", "9", "1", "8", "2", "7", "3", "6", "4", "5"];
+var magicNumber = rawNumberList
+  .Select(int.Parse) // converts the strings to integers
+  .OrderByDescending(number => number) // sorts the numbers in descending order
+  .TakeLast(5) // takes the last 5 numbers -> 4, 3, 2, 1, 0
+  .Where(number => number % 2 == 0) // filters out the odd numbers -> 4, 2, 0
+  .Average(); // calculates the average -> 2
+```
+
+- Need to be careful because LINQ is only going to iterate over the data when we call a method that is going to return the data, like `ToList`, `ToArray`...
+
+### Lazy
+
+- Lazy is a class, that accepts generics, that is going to delay the creation of the object until it is needed
+- Lazy computes the value only once and then it caches it, so the next time we call the value, it is going to return the cached value
+
+```csharp
+Lazy<int> lazyValue = new(() =>
+{
+  Console.WriteLine("Calculating the value...");
+  int[] numbers = [35,20,30,40,50];
+
+  int max = int.MinValue;
+  foreach(int number in numbers)
+  {
+    if (number > max)
+    {
+      max = number;
+    }
+    // Simulating a long calculation
+    Thread.Sleep(1000);
+  }
+
+  return max;
+});
+
+Console.WriteLine("The value is: " + lazyValue.Value); // Here is going to calculate the value with delay
+Console.WriteLine("The value is: " + lazyValue.Value); // Here is going to return the value without delay
+```
+
+### Events
+
+- A way that we can have delegates to be called by subscribing them to events. That way we can create a mechanism to notify other parts of the code that something happened
+
+```csharp
+public class MessageEventArgs : EventArgs
+{
+  public MessageEventArgs(string message)
+  {
+    Message = message;
+  }
+
+  public string Message { get; }
+}
+
+public class EventSource
+{
+  public event EventHandler<MessageEventArgs> SourceChanged;
+
+  public void RaiseEvent(string message)
+  {
+    // Check if there are any subscribers. If there's no subscribers the event is going to be null. That is why we have a ? before the Invoke
+    SourceChanged?.Invoke(this, new MessageEventArgs(message));
+  }
+}
+```
+
+- To subscribe to an event, we can use the `+=` operator
+- To unsubscribe to an event, we can use the `-=` operator
+
+```csharp
+EventSource eventSource = new();
+eventSource.SourceChanged += HandleEvent; // subscribing
+eventSource.RaiseEvent("Hello World!"); // This is going to call the HandleEvent method
+eventSource.SourceChanged -= HandleEvent; // unsubscribing
+
+public void HandleEvent(object sender, MessageEventArgs e)
+{
+  Console.WriteLine($"Message: {e.Message}");
 }
 ```
