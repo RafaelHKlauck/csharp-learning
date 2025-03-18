@@ -58,6 +58,12 @@ This repo is to store my notes about C# programming language that I'm learning f
   - [LINQ](#linq)
   - [Lazy](#lazy)
   - [Events](#events)
+- [Asynchronous, Parallel and Multi-Threading](#asynchronous-parallel-and-multi-threading)
+  - [Parallel](#parallel)
+  - [Background Workers](#background-workers)
+  - [Task Objects](#task-objects)
+  - [Async/Await](#asyncawait)
+  - [Cancellation](#cancellation)
 
 ## Variables
 
@@ -1444,4 +1450,220 @@ public void HandleEvent(object sender, MessageEventArgs e)
 {
   Console.WriteLine($"Message: {e.Message}");
 }
+```
+
+## Asynchronous, Parallel and Multi-Threading
+
+- Asynchronous programming is a way to run tasks in parallel
+  - It is used to run tasks that are going to take a long time to complete
+  - It is used to run tasks that are going to wait for something to happen
+- Parallel programming is a way to run tasks in parallel
+  - It is used to run tasks that can be run at the same time
+- Multi-threading is a way to run tasks in parallel
+  - It is used to run tasks that can be run at the same time
+
+### Threads
+
+- `Thread` object is used to create and manage a thread
+
+```csharp
+Thread thread = new Thread(() =>
+{
+  Console.WriteLine("Hello from the thread!");
+});
+thread.Start();
+
+// We can also pass parameters to the thread
+record ThreadContext(string Message, string Message);
+ThreadContext threadContext1 = new("Thread1", "Hello Thread1");
+
+Thread thread1 = new Thread(new ParameterizedThreadStart(o =>
+{
+  ThreadContext context = (ThreadContext)o;
+  Thread.CurrentThread.Name = context.Name;
+  Console.WriteLine(context.Message);
+}
+));
+Thread1.Start(threadContext1);
+```
+
+- On Threads there's a attribute called `IsBackground` that is going to make the thread a background thread. This means that the thread is going to be terminated when the main thread is terminated
+
+### Background Workers
+
+- To be able to access BackgroundWorker, we need to add the `System.ComponentModel` namespace
+- BackgroundWorker is a class that allows you to run tasks in the background. It is build on top of `threads`
+
+```csharp
+BackgroundWorker worker1 = new();
+
+worker1.DoWork += (sender, e) =>
+{
+  // all of this code is what is going to run in the background
+  while(true)
+  {
+    Console.WriteLine("Hello from the background worker!");
+    Thread.Sleep(1000);
+  }
+};
+worker1.RunWorkerAsync();
+```
+
+- To pass parameters to the background worker, we can use the `Argument` property
+
+```csharp
+BackgroundWorker worker2 = new();
+worker2.DoWork += (sender, e) =>
+{
+  int iterations = (int)e.Argument;
+  for(int i = 0; i < iterations; i++)
+  {
+    Console.WriteLine($"Hello from the background worker! Iteration: {i}");
+    Thread.Sleep(1000);
+  }
+};
+worker2.RunWorkerAsync(5);
+```
+
+- There's a `RunWorkerCompleted` event that is going to be called when the background worker finishes
+
+```csharp
+worker2.RunWorkerCompleted += (sender, e) =>
+{
+  Console.WriteLine("The background worker 2 has finished!");
+};
+```
+
+- We can also cancel the background worker
+
+```csharp
+BackgroundWorker worker3 = new();
+worker3.DoWork += (sender, e) =>
+{
+  while(!worker3.CancellationPending)
+  {
+    Console.WriteLine("Hello from the background worker 3!");
+    Thread.Sleep(1000);
+  }
+};
+
+worker3.RunWorkerAsync();
+
+BackgroundWorker worker4 = new();
+worker4.DoWork += (sender, e) =>
+{
+  worker3.CancelAsync(); // This is going to cancel the worker3
+};
+worker4.RunWorkerAsync();
+```
+
+### Task Objects
+
+- `Task` is a class that represents an asynchronous operation
+- With it we can have a more control over the asynchronous operation
+
+```csharp
+Task task1 = Task.Run(() =>
+{
+  Console.WriteLine("Hello from the task!");
+});
+
+Task task2 = Task.Run(() =>
+{
+  for(int i = 0; i < 5; i++)
+  {
+    Console.WriteLine($"Hello from the task! Iteration: {i}");
+    Thread.Sleep(1000);
+  }
+});
+
+Task.WaitAll(task1, task2); // This is going to wait for all the tasks to finish
+```
+
+- There's `WaitAll` to wait for all the tasks to finish
+- There's `WaitAny` to wait for any of the tasks to finish
+- There's `Wait` to wait for a single task to finish
+
+```csharp
+Task task3 = Task.Run(() =>
+{
+  Console.WriteLine("Hello from the task 3!");
+}).ContinueWith((t) =>
+{
+  Console.WriteLine("Hello from the continuation task!");
+});
+// The continuation task is going to run after the task3 finishes
+```
+
+- We can have multiple continuations
+- We can have a continuation that is going to run only if the task is successful or if the task fails(`TaskContinuationOptions.OnlyOnFaulted`)
+
+## Async/Await
+
+- `async` is a modifier that is used to define an asynchronous method
+- `await` is an operator that is used to wait for an asynchronous operation to complete
+
+```csharp
+async Task FirstAsyncMethod()
+{
+  await Task.Delay(TimeSpan.FromSeconds(1));
+  Console.WriteLine("Hello from the async method!");
+}
+
+async Task<int> SecondAsyncMethod()
+{
+  await Task.Delay(TimeSpan.FromSeconds(1));
+  return 42;
+}
+
+await FirstAsyncMethod();
+// OR
+Task firstAsyncMethodTask = FirstAsyncMethod();
+await firstAsyncMethodTask;
+```
+
+-`Task.Yield` an asynchronous method to force the method to complete asynchronously. If there is a current synchronization context, this will post the remainder of the method's execution back to that context.
+
+```csharp
+async Task ThirdAsyncMethod()
+{
+  await Task.Yield();
+  var doSomething = ExecuteSomething();
+}
+
+await ThirdAsyncMethod();
+```
+
+- On example above, the `ExecuteSomething` is going to run asynchronously. But if we don't have the `Task.Yield`, the `ExecuteSomething` is going to run synchronously
+
+### Cancellation
+
+- We can cancel an asynchronous operation by using a `CancellationToken`
+
+```csharp
+CancellationTokenSource cts = new();
+var cancellationToken = cts.Token;
+
+async Task LoopUntilCancelledAsync(
+  CancellationToken cancellationToken)
+{
+  while(!cancellationToken.IsCancellationRequested)
+  {
+    Console.WriteLine("Hello from the loop!");
+    // We need to use a try catch because the task is going to throw an exception when it is cancelled
+    try
+    {
+      await Task.Delay(3000, cancellationToken);
+    }
+    catch(OperationCanceledException)
+    {
+      Console.WriteLine("The task was cancelled!");
+    }
+  }
+}
+
+Task loopTask = LoopUntilCancelledAsync(cancellationToken);
+Console.ReadLine();
+cts.Cancel(); // This is going to cancel the loopTask
+await loopTask; // Just to make sure that the loopTask is finished
 ```
